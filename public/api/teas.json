@@ -1,0 +1,98 @@
+[
+    {
+        "id":"2_time_char_roas_high_mt_oo",
+        "name":"2-time Charcoal Roasted High Mountain Oolong",
+        "name-orig": "二次炭焙高山茶",
+        "type":"Oolong tea",
+        "tea-amount":"1g",
+        "water-amount":"30ml",
+        "add-inst":"Rinse 5 seconds", //additional instructions
+        "steep-temp":[
+            "98ºC / 208ºF",
+            "98ºC / 208ºF",
+            "98ºC / 208ºF",
+            "98ºC / 208ºF"
+        ],
+        "steep-time":[
+            35,
+            40,
+            50,
+            60
+        ],
+        "add-time":10 //additional time added after 4th steep
+        
+        
+    },
+    {
+        "id":"luye_red_oo",
+        "name":"Luye Red Oolong",
+        "name-orig": "鹿野紅烏龍",
+        "type":"Oolong tea",
+        "tea-amount":"1g",
+        "water-amount":"40ml",
+        "add-inst":"Rinse 5 seconds",
+        "steep-temp":[
+            "92ºC / 198ºF",
+            "95ºC / 203ºF",
+            "98ºC / 208ºF",
+            "98ºC / 208ºF"
+        ],
+        "steep-time":[
+            30,
+            20,
+            30,
+            50
+        ],
+        "add-time":20
+        
+        
+    },
+    {
+        "id":"5_time_char_roas_dong_ding_oo",
+        "name":"5-time Charcoal Roasted Dong Ding Oolong",
+        "name-orig": "五次重炭焙凍頂山茶",
+        "type":"Oolong tea",
+        "tea-amount":"1g",
+        "water-amount":"30ml",
+        "add-inst":"Rinse 5 seconds",
+        "steep-temp":[
+            "98ºC / 208ºF",
+            "98ºC / 208ºF",
+            "98ºC / 208ºF",
+            "100ºC / 212ºF"
+        ],
+        "steep-time":[
+            35,
+            40,
+            50,
+            60
+        ],
+        "add-time":10
+        
+        
+    },
+    {
+        "id":"ali_milk_oo",
+        "name":"Alishan Milk (Jinxuan) Oolong",
+        "name-orig": "阿里山金萱烏龍",
+        "type":"Oolong tea",
+        "tea-amount":"1g",
+        "water-amount":"25ml",
+        "add-inst":"Rinse 5 seconds",
+        "steep-temp":[
+            "98ºC / 208ºF",
+            "98ºC / 208ºF",
+            "98ºC / 208ºF",
+            "100ºC / 212ºF"
+        ],
+        "steep-time":[
+            45,
+            40,
+            50,
+            60
+        ],
+        "add-time":10
+        
+        
+    },
+]
