@@ -1,6 +1,6 @@
 [
   {
-    "id": "2_time_char_roas_high_mt_oo",
+    "id": "2_time_char_oo",
     "name": "2-time Charcoal Roasted High Mountain Oolong",
     "name-orig": "二次炭焙高山茶",
     "type": "Oolong tea",
@@ -20,7 +20,7 @@
     "id": "luye_red_oo",
     "name": "Luye Red Oolong",
     "name-orig": "鹿野紅烏龍",
-    "type": "Oolong tea",
+    "type": "Oolong",
     "tea-amount": "1g",
     "water-amount": "40ml",
     "add-inst": "Rinse 5 seconds",
@@ -34,10 +34,10 @@
     "add-time": 20
   },
   {
-    "id": "5_time_char_roas_dong_ding_oo",
+    "id": "5_time_char_oo",
     "name": "5-time Charcoal Roasted Dong Ding Oolong",
     "name-orig": "五次重炭焙凍頂山茶",
-    "type": "Oolong tea",
+    "type": "Oolong",
     "tea-amount": "1g",
     "water-amount": "30ml",
     "add-inst": "Rinse 5 seconds",
@@ -54,7 +54,7 @@
     "id": "ali_milk_oo",
     "name": "Alishan Milk (Jinxuan) Oolong",
     "name-orig": "阿里山金萱烏龍",
-    "type": "Oolong tea",
+    "type": "Oolong",
     "tea-amount": "1g",
     "water-amount": "25ml",
     "add-inst": "Rinse 5 seconds",
