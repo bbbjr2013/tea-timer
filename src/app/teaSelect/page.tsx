@@ -11,10 +11,15 @@ import {
 const TeaSelect = () => {
   return (
     <div>
-      <h1>A Page for Selecting Tea</h1>
       <Button variant="contained" href="./">
         Go back to home page
       </Button>
+      <h1>A Page for Selecting Tea</h1>
+      <p>
+        This is where tea selection happens, which will fill the TeaHome page
+        with the selected tea
+      </p>
+
       <FormControl>
         <FormLabel id="form-label">Select a Tea</FormLabel>
         <RadioGroup>
