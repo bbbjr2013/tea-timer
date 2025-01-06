@@ -6,7 +6,7 @@
     "type": "Oolong",
     "tea-amount": "1g",
     "water-amount": "30ml",
-    "add-inst": "Rinse 5 seconds", //additional instructions
+    "add-inst": "Rinse 5 seconds",
     "steep-temp": [
       "98ºC / 208ºF",
       "98ºC / 208ºF",
@@ -14,7 +14,7 @@
       "98ºC / 208ºF"
     ],
     "steep-time": [35, 40, 50, 60],
-    "add-time": 10 //additional time added after 4th steep
+    "add-time": 10
   },
   {
     "id": "luye_red_oo",
