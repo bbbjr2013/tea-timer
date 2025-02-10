@@ -27,19 +27,19 @@ const TeaSelect = () => {
     localStorage.setItem("selectedTea", event.target.value);
   };
 
-  const handleNavigate = () => {
+  const handleNavigate = async () => {
     if (selectedTea) {
       const encodedTea = encodeURIComponent(selectedTea);
-      console.log(encodedTea && "no. 1");
-      router.push(`/teaHome?tea=${encodedTea}`);
+      console.log("Encoded Tea:", encodedTea);
+      router.push(`/?tea=${encodedTea}`);
     }
   };
 
-  console.log(selectedTea);
+  console.log("Selected tea:", selectedTea);
 
   return (
     <div>
-      <Button onClick={handleNavigate} variant="contained" href="./">
+      <Button onClick={handleNavigate} variant="contained">
         Go back to home page
       </Button>
       <h1>A Page for Selecting Tea</h1>
@@ -49,7 +49,6 @@ const TeaSelect = () => {
       </p>
 
       <FormControl>
-        {/* <FormLabel id="form-label">Select a Tea</FormLabel> */}
         <RadioGroup value={selectedTea} onChange={handleChange}>
           {teaData.map((tea) => (
             <FormControlLabel

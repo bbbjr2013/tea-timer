@@ -10,14 +10,18 @@ const TeaHome = () => {
 
   const searchParams = useSearchParams();
   // const selectedTeaId = searchParams.get("tea");
-  const [selectedTea, setSelectedTea] = useState<string | null>(null);
+  const [selectedTeaName, setSelectedTeaName] = useState<string | null>(null);
 
   useEffect(() => {
     const tea = searchParams.get("tea");
     if (tea) {
-      setSelectedTea(tea);
+      setSelectedTeaName(tea);
     }
   }, [searchParams]);
+
+  console.log("Encoded tea:", selectedTeaName);
+
+  const selectedTea = teaData.find((t) => t.name === selectedTeaName);
 
   console.log(selectedTea);
 
@@ -26,14 +30,24 @@ const TeaHome = () => {
       <Button variant="contained" href="/teaSelect">
         Select a Tea
       </Button>
-      <h1>Tea Home Page</h1>
-      <p>
+
+      <div>
         {selectedTea ? (
-          <p>Selected Tea: {selectedTea}</p>
+          <div>
+            <p>Tea ID: {selectedTea.id}</p>
+            <p>Tea Name: {selectedTea.name}</p>
+            <p>Original Name: {selectedTea.nameOrig}</p>
+            <p>Tea Type: {selectedTea.type}</p>
+            <p>
+              Tea/Water Amount: {selectedTea.teaAmount} /{" "}
+              {selectedTea.waterAmount}
+            </p>
+            <p>Additional Instructions: {selectedTea.addInst} </p>
+          </div>
         ) : (
           <p>No tea selected</p>
         )}
-      </p>
+      </div>
     </div>
   );
 };
