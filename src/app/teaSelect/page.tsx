@@ -30,12 +30,12 @@ const TeaSelect = () => {
   const handleNavigate = async () => {
     if (selectedTea) {
       const encodedTea = encodeURIComponent(selectedTea);
-      console.log("Encoded Tea:", encodedTea);
+      console.log("Encoded Tea:", encodedTea); // debugger
       router.push(`/?tea=${encodedTea}`);
     }
   };
 
-  console.log("Selected tea:", selectedTea);
+  console.log("Selected tea:", selectedTea); // debugger
 
   return (
     <div>

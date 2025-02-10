@@ -8,6 +8,10 @@ const TeaHome = () => {
   // const router = useRouter();
   // const { tea } = router.query;
 
+  const defaultTea = teaData[0];
+
+  console.log("Default tea:", defaultTea);
+
   const searchParams = useSearchParams();
   // const selectedTeaId = searchParams.get("tea");
   const [selectedTeaName, setSelectedTeaName] = useState<string | null>(null);
@@ -19,11 +23,11 @@ const TeaHome = () => {
     }
   }, [searchParams]);
 
-  console.log("Encoded tea:", selectedTeaName);
+  console.log("Encoded tea:", selectedTeaName); // debugger
 
   const selectedTea = teaData.find((t) => t.name === selectedTeaName);
 
-  console.log(selectedTea);
+  console.log(selectedTea); // debugger
 
   return (
     <div>
@@ -45,7 +49,17 @@ const TeaHome = () => {
             <p>Additional Instructions: {selectedTea.addInst} </p>
           </div>
         ) : (
-          <p>No tea selected</p>
+          <div>
+            <p>Tea ID: {defaultTea.id}</p>
+            <p>Tea Name: {defaultTea.name}</p>
+            <p>Original Name: {defaultTea.nameOrig}</p>
+            <p>Tea Type: {defaultTea.type}</p>
+            <p>
+              Tea/Water Amount: {defaultTea.teaAmount} /{" "}
+              {defaultTea.waterAmount}
+            </p>
+            <p>Additional Instructions: {defaultTea.addInst} </p>
+          </div>
         )}
       </div>
     </div>
