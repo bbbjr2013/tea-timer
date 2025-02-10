@@ -1,41 +1,45 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Button } from "@mui/material";
 import {
   Radio,
   RadioGroup,
   FormControl,
   FormLabel,
   FormControlLabel,
+  Button,
 } from "@mui/material";
 import teaData from "../../api/teas.json";
 
 const TeaSelect = () => {
-  const defaultSelectedTea = localStorage.getItem("selectedTea") || teaData[0]; //leave out .name or just keep it there because it needs to be a string. no way to pass in the entire information of a single array?
-
-  const [selectedTea, setSelectedTea] = useState(defaultSelectedTea);
+  const [selectedTea, setSelectedTea] = useState(() => {
+    return localStorage.getItem("selectedTea") || teaData[0].name;
+  });
   const router = useRouter();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (selectedTea) {
-      localStorage.setItem("selectedTea", selectedTea); //this function only stores strings though so it doesn't really work?
-      router.push(`../teaHome/page.tsx/${selectedTea}`);
-    }
+  useEffect(() => {
+    const storedTea = localStorage.getItem("selectedTea");
+    if (storedTea) setSelectedTea(storedTea);
+  }, []);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSelectedTea(event.target.value);
+    localStorage.setItem("selectedTea", event.target.value);
   };
 
-  useEffect(() => {
+  const handleNavigate = () => {
     if (selectedTea) {
-      localStorage.setItem("selectedTea", selectedTea);
+      const encodedTea = encodeURIComponent(selectedTea);
+      console.log(encodedTea && "no. 1");
+      router.push(`/teaHome?tea=${encodedTea}`);
     }
-  }, [selectedTea]);
+  };
 
   console.log(selectedTea);
 
   return (
     <div>
-      <Button variant="contained" href="./">
+      <Button onClick={handleNavigate} variant="contained" href="./">
         Go back to home page
       </Button>
       <h1>A Page for Selecting Tea</h1>
@@ -45,28 +49,16 @@ const TeaSelect = () => {
       </p>
 
       <FormControl>
-        <FormLabel id="form-label">Select a Tea</FormLabel>
-        <RadioGroup>
-          <FormControlLabel
-            value="2_time_char_oo"
-            control={<Radio />}
-            label="2-time Charcoal Roasted High Mountain Oolong"
-          />
-          <FormControlLabel
-            value="luye_red_oo"
-            control={<Radio />}
-            label="Luye Red Oolong"
-          />
-          <FormControlLabel
-            value="5_time_char_oo"
-            control={<Radio />}
-            label="5-time Charcoal Roasted Dong Ding Oolong"
-          />
-          <FormControlLabel
-            value="ali_milk_oo"
-            control={<Radio />}
-            label="Alishan Milk (Jinxuan) Oolong"
-          />
+        {/* <FormLabel id="form-label">Select a Tea</FormLabel> */}
+        <RadioGroup value={selectedTea} onChange={handleChange}>
+          {teaData.map((tea) => (
+            <FormControlLabel
+              key={tea.id}
+              value={tea.name}
+              control={<Radio />}
+              label={tea.name}
+            />
+          ))}
         </RadioGroup>
       </FormControl>
     </div>
