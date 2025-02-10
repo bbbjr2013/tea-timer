@@ -10,7 +10,7 @@ const TeaHome = () => {
 
   const defaultTea = teaData[0];
 
-  console.log("Default tea:", defaultTea);
+  console.log("Default tea:", defaultTea); // debugger
 
   const searchParams = useSearchParams();
   // const selectedTeaId = searchParams.get("tea");
