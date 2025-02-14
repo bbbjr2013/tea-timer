@@ -1,5 +1,3 @@
-import Link from "next/link";
-import { Button } from "@mui/material/";
 import TeaHome from "./teaHome/page";
 
 export default function Home() {
