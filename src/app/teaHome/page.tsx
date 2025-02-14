@@ -1,10 +1,10 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import teaData from "../../api/teas.json";
 import { Button } from "@mui/material";
 
-const TeaHome = () => {
+const TeaContent = () => {
   // const router = useRouter();
   // const { tea } = router.query;
 
@@ -13,15 +13,18 @@ const TeaHome = () => {
   console.log("Default tea:", defaultTea); // debugger
 
   const searchParams = useSearchParams();
-  // const selectedTeaId = searchParams.get("tea");
-  const [selectedTeaName, setSelectedTeaName] = useState<string | null>(null);
+  const [selectedTeaName, setSelectedTeaName] = useState<string>(
+    defaultTea.name || "",
+  );
 
   useEffect(() => {
     const tea = searchParams.get("tea");
     if (tea) {
       setSelectedTeaName(tea);
+    } else {
+      setSelectedTeaName(defaultTea.name);
     }
-  }, [searchParams]);
+  }, [searchParams, defaultTea.name]);
 
   console.log("Encoded tea:", selectedTeaName); // debugger
 
@@ -50,19 +53,19 @@ const TeaHome = () => {
           </div>
         ) : (
           <div>
-            <p>Tea ID: {defaultTea.id}</p>
-            <p>Tea Name: {defaultTea.name}</p>
-            <p>Original Name: {defaultTea.nameOrig}</p>
-            <p>Tea Type: {defaultTea.type}</p>
-            <p>
-              Tea/Water Amount: {defaultTea.teaAmount} /{" "}
-              {defaultTea.waterAmount}
-            </p>
-            <p>Additional Instructions: {defaultTea.addInst} </p>
+            <p>No Selected Tea</p>
           </div>
         )}
       </div>
     </div>
+  );
+};
+
+const TeaHome = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <TeaContent />
+    </Suspense>
   );
 };
 

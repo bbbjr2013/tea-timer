@@ -5,26 +5,28 @@ import {
   Radio,
   RadioGroup,
   FormControl,
-  FormLabel,
   FormControlLabel,
   Button,
 } from "@mui/material";
 import teaData from "../../api/teas.json";
 
 const TeaSelect = () => {
-  const [selectedTea, setSelectedTea] = useState(() => {
-    return localStorage.getItem("selectedTea") || teaData[0].name;
-  });
+  const [selectedTea, setSelectedTea] = useState(teaData[0].name); //removed  return localStorage.getItem("selectedTea") || logic
   const router = useRouter();
 
   useEffect(() => {
-    const storedTea = localStorage.getItem("selectedTea");
-    if (storedTea) setSelectedTea(storedTea);
+    //checks if we're in the browser before rusing localStorage and moves all localStorage operations into the useEffect or behind the window check
+    if (typeof window !== "undefined") {
+      const storedTea = localStorage.getItem("selectedTea");
+      if (storedTea) setSelectedTea(storedTea);
+    }
   }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSelectedTea(event.target.value);
-    localStorage.setItem("selectedTea", event.target.value);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("selectedTea", event.target.value);
+    }
   };
 
   const handleNavigate = async () => {
