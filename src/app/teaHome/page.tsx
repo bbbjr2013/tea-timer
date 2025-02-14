@@ -1,67 +1,52 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import teaData from "../../api/teas.json";
 import { Button } from "@mui/material";
 
-const TeaHome = () => {
-  // const router = useRouter();
-  // const { tea } = router.query;
+type Tea = {
+  id: string;
+  name: string;
+  nameOrig: string;
+  type: string;
+  teaAmount: string;
+  waterAmount: string;
+  addInst: string;
+};
 
-  const defaultTea = teaData[0];
+// Separate component for tea details
+const TeaDetails = ({ tea }: { tea: Tea }) => (
+  <div className="space-y-2">
+    <p>Tea ID: {tea.id}</p>
+    <p>Tea Name: {tea.name}</p>
+    <p>Original Name: {tea.nameOrig}</p>
+    <p>Tea Type: {tea.type}</p>
+    <p>
+      Tea/Water Amount: {tea.teaAmount} / {tea.waterAmount}
+    </p>
+    <p>Additional Instructions: {tea.addInst}</p>
+  </div>
+);
 
-  console.log("Default tea:", defaultTea); // debugger
-
+// Component that uses searchParams
+const TeaContent = () => {
   const searchParams = useSearchParams();
-  // const selectedTeaId = searchParams.get("tea");
-  const [selectedTeaName, setSelectedTeaName] = useState<string | null>(null);
+  const teaName = searchParams.get("tea");
+  const selectedTea = teaData.find((t) => t.name === teaName) || teaData[0];
 
-  useEffect(() => {
-    const tea = searchParams.get("tea");
-    if (tea) {
-      setSelectedTeaName(tea);
-    }
-  }, [searchParams]);
+  return <TeaDetails tea={selectedTea} />;
+};
 
-  console.log("Encoded tea:", selectedTeaName); // debugger
-
-  const selectedTea = teaData.find((t) => t.name === selectedTeaName);
-
-  console.log(selectedTea); // debugger
-
+const TeaHome = () => {
   return (
-    <div>
-      <Button variant="contained" href="/teaSelect">
-        Select a Tea
+    <div className="p-6 space-y-6">
+      <Button>
+        <a href="/teaSelect">Select a Tea</a>
       </Button>
 
-      <div>
-        {selectedTea ? (
-          <div>
-            <p>Tea ID: {selectedTea.id}</p>
-            <p>Tea Name: {selectedTea.name}</p>
-            <p>Original Name: {selectedTea.nameOrig}</p>
-            <p>Tea Type: {selectedTea.type}</p>
-            <p>
-              Tea/Water Amount: {selectedTea.teaAmount} /{" "}
-              {selectedTea.waterAmount}
-            </p>
-            <p>Additional Instructions: {selectedTea.addInst} </p>
-          </div>
-        ) : (
-          <div>
-            <p>Tea ID: {defaultTea.id}</p>
-            <p>Tea Name: {defaultTea.name}</p>
-            <p>Original Name: {defaultTea.nameOrig}</p>
-            <p>Tea Type: {defaultTea.type}</p>
-            <p>
-              Tea/Water Amount: {defaultTea.teaAmount} /{" "}
-              {defaultTea.waterAmount}
-            </p>
-            <p>Additional Instructions: {defaultTea.addInst} </p>
-          </div>
-        )}
-      </div>
+      <Suspense fallback={<div>Loading...</div>}>
+        <TeaContent />
+      </Suspense>
     </div>
   );
 };
