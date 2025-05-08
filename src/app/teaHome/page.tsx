@@ -1,18 +1,22 @@
 "use client";
-import React, { Suspense } from "react";
+
+import React, { useEffect, useState, Suspense } from "react";
+
+
+
 import { useSearchParams } from "next/navigation";
 import teaData from "../../api/teas.json";
 import { Button } from "@mui/material";
 
-type Tea = {
-  id: string;
-  name: string;
-  nameOrig: string;
-  type: string;
-  teaAmount: string;
-  waterAmount: string;
-  addInst: string;
-};
+
+const TeaContent = () => {
+  // const router = useRouter();
+  // const { tea } = router.query;
+
+  const defaultTea = teaData[0];
+
+  console.log("Default tea:", defaultTea); // debugger
+
 
 // Separate component for tea details
 const TeaDetails = ({ tea }: { tea: Tea }) => (
@@ -31,8 +35,20 @@ const TeaDetails = ({ tea }: { tea: Tea }) => (
 // Component that uses searchParams
 const TeaContent = () => {
   const searchParams = useSearchParams();
-  const teaName = searchParams.get("tea");
-  const selectedTea = teaData.find((t) => t.name === teaName) || teaData[0];
+
+  const [selectedTeaName, setSelectedTeaName] = useState<string>(
+    defaultTea.name || "",
+  );
+
+  useEffect(() => {
+    const tea = searchParams.get("tea");
+    if (tea) {
+      setSelectedTeaName(tea);
+    } else {
+      setSelectedTeaName(defaultTea.name);
+    }
+  }, [searchParams, defaultTea.name]);
+
 
   return <TeaDetails tea={selectedTea} />;
 };
@@ -44,10 +60,36 @@ const TeaHome = () => {
         <a href="/teaSelect">Select a Tea</a>
       </Button>
 
-      <Suspense fallback={<div>Loading...</div>}>
-        <TeaContent />
-      </Suspense>
+
+      <div>
+        {selectedTea ? (
+          <div>
+            <p>Tea ID: {selectedTea.id}</p>
+            <p>Tea Name: {selectedTea.name}</p>
+            <p>Original Name: {selectedTea.nameOrig}</p>
+            <p>Tea Type: {selectedTea.type}</p>
+            <p>
+              Tea/Water Amount: {selectedTea.teaAmount} /{" "}
+              {selectedTea.waterAmount}
+            </p>
+            <p>Additional Instructions: {selectedTea.addInst} </p>
+          </div>
+        ) : (
+          <div>
+            <p>No Selected Tea</p>
+          </div>
+        )}
+      </div>
+
     </div>
+  );
+};
+
+const TeaHome = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <TeaContent />
+    </Suspense>
   );
 };
 
