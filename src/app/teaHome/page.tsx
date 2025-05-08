@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useEffect, useState, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import teaData from "../../api/teas.json";
@@ -8,26 +7,11 @@ import { Button } from "@mui/material";
 const TeaContent = () => {
   // const router = useRouter();
   // const { tea } = router.query;
+
   const defaultTea = teaData[0];
+
   console.log("Default tea:", defaultTea); // debugger
 
-
-// Separate component for tea details
-const TeaDetails = ({ tea }: { tea: Tea }) => (
-  <div className="space-y-2">
-    <p>Tea ID: {tea.id}</p>
-    <p>Tea Name: {tea.name}</p>
-    <p>Original Name: {tea.nameOrig}</p>
-    <p>Tea Type: {tea.type}</p>
-    <p>
-      Tea/Water Amount: {tea.teaAmount} / {tea.waterAmount}
-    </p>
-    <p>Additional Instructions: {tea.addInst}</p>
-  </div>
-);
-
-// Component that uses searchParams
-const TeaContent = () => {
   const searchParams = useSearchParams();
   const [selectedTeaName, setSelectedTeaName] = useState<string>(
     defaultTea.name || "",
@@ -42,16 +26,16 @@ const TeaContent = () => {
     }
   }, [searchParams, defaultTea.name]);
 
-
   console.log("Encoded tea:", selectedTeaName); // debugger
+
   const selectedTea = teaData.find((t) => t.name === selectedTeaName);
+
   console.log(selectedTea); // debugger
 
-const TeaHome = () => {
   return (
-    <div className="p-6 space-y-6">
-      <Button>
-        <a href="/teaSelect">Select a Tea</a>
+    <div>
+      <Button variant="contained" href="/teaSelect">
+        Select a Tea
       </Button>
 
       <div>
@@ -73,7 +57,6 @@ const TeaHome = () => {
           </div>
         )}
       </div>
-
     </div>
   );
 };
