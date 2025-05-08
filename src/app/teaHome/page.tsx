@@ -1,20 +1,14 @@
 "use client";
 
 import React, { useEffect, useState, Suspense } from "react";
-
-
-
 import { useSearchParams } from "next/navigation";
 import teaData from "../../api/teas.json";
 import { Button } from "@mui/material";
 
-
 const TeaContent = () => {
   // const router = useRouter();
   // const { tea } = router.query;
-
   const defaultTea = teaData[0];
-
   console.log("Default tea:", defaultTea); // debugger
 
 
@@ -35,7 +29,6 @@ const TeaDetails = ({ tea }: { tea: Tea }) => (
 // Component that uses searchParams
 const TeaContent = () => {
   const searchParams = useSearchParams();
-
   const [selectedTeaName, setSelectedTeaName] = useState<string>(
     defaultTea.name || "",
   );
@@ -50,8 +43,9 @@ const TeaContent = () => {
   }, [searchParams, defaultTea.name]);
 
 
-  return <TeaDetails tea={selectedTea} />;
-};
+  console.log("Encoded tea:", selectedTeaName); // debugger
+  const selectedTea = teaData.find((t) => t.name === selectedTeaName);
+  console.log(selectedTea); // debugger
 
 const TeaHome = () => {
   return (
@@ -59,7 +53,6 @@ const TeaHome = () => {
       <Button>
         <a href="/teaSelect">Select a Tea</a>
       </Button>
-
 
       <div>
         {selectedTea ? (
