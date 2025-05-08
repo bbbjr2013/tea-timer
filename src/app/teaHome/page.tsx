@@ -7,9 +7,7 @@ import { Button } from "@mui/material";
 const TeaContent = () => {
   // const router = useRouter();
   // const { tea } = router.query;
-
   const defaultTea = teaData[0];
-
   console.log("Default tea:", defaultTea); // debugger
 
   const searchParams = useSearchParams();
@@ -27,9 +25,7 @@ const TeaContent = () => {
   }, [searchParams, defaultTea.name]);
 
   console.log("Encoded tea:", selectedTeaName); // debugger
-
   const selectedTea = teaData.find((t) => t.name === selectedTeaName);
-
   console.log(selectedTea); // debugger
 
   return (
@@ -37,7 +33,6 @@ const TeaContent = () => {
       <Button variant="contained" href="/teaSelect">
         Select a Tea
       </Button>
-
       <div>
         {selectedTea ? (
           <div>
