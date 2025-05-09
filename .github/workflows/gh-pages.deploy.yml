@@ -33,6 +33,8 @@ jobs:
         run: npm ci
       - name: Build project
         run: npm run build
+      - name: Create out directory if it doesn't exist
+        run: mkdir -p ./out
       - name: Add .nojekyll file
         run: touch ./out/.nojekyll
       - name: Deploy to GitHub Pages
